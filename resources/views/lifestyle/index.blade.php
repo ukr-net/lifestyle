@@ -1,7 +1,6 @@
 @extends('lifestyle.layouts.site')
 
 @section('content')
-<div id="content">
     <div class="container no-padding">
         <div class="row">
             <!-- Carousel Slideshow -->
@@ -179,5 +178,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

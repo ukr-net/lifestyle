@@ -214,7 +214,9 @@
             </div>
             <!-- === END HEADER === -->
             <!-- === BEGIN CONTENT === -->
-            @yield('content')
+            <div id="content">
+                @yield('content')
+            </div>
             <!-- === END CONTENT === -->
             <!-- === BEGIN FOOTER === -->
             <div id="content-bottom-border" class="container">
