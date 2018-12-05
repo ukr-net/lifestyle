@@ -60,7 +60,9 @@
                 </div>
             </div>
             <!-- Top Menu -->
+            @if(isset($topMenu))
                 {!!$topMenu!!}
+            @endif
             <!-- End Top Menu -->
             <div id="post_header" class="container" style="height:340px">
             </div>

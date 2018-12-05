@@ -1,4 +1,5 @@
 <?php
     return [
-        'title' => 'Life Style'
+        'title' => 'Life Style',
+        'slider_dir' => 'slideshow'
     ];

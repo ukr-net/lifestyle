@@ -3,8 +3,11 @@
 abstract class Service {
     protected $model;
 
-    public function get() {
-        $builder = $this->model->select('*');
-        return $builder->get();
+    public function getAll() {
+        return $this->model->select('*')->get();
+    }
+
+    public function getActive() {
+        return $this->model::where('active', 1)->get();
     }
 }

@@ -10,9 +10,9 @@ class MenuService extends Service
     }
 
     public function getMenu() {
-        $collectionMenuItems = $this->get();
+        $collectionMenuItems = $this->getAll();
 
-        $builder = LaravelMenu::make('topMenu', function($menu) use($collectionMenuItems) {
+        return LaravelMenu::make('topMenu', function($menu) use($collectionMenuItems) {
             foreach ($collectionMenuItems as $item) {
                 if ($item->parent == 0) {
                     $menuItem = $menu->add($item->title, $item->url)->id($item->id)->data('ico', $item->ico);
@@ -23,7 +23,5 @@ class MenuService extends Service
                 }
             }
         });
-
-        return $builder;
     }
 }
