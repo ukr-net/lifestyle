@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\MenuService;
 use App\Services\SliderService;
+use App\Services\PortfolioService;
 
 class IndexController extends SiteController
 {
@@ -12,24 +13,31 @@ class IndexController extends SiteController
 
     public function __construct(
         MenuService $menuService,
-        SliderService $sliderService
+        SliderService $sliderService,
+        PortfolioService $portfolioService
     ) {
         parent::__construct($menuService);
+        
+        $this->sliderService = $sliderService;
+        $this->portfolioService = $portfolioService;
 
         $this->template = 'index';
-        $this->sliderService = $sliderService;
     }
 
     public function index() {
-        $this->createSlider();
+        $slideShow = $this->getRenderedSlideShow();
+        $portfolio = $this->portfolioService->getPorfolio(8);
+
+        $this->addTemplateVariable('slideShow', $slideShow);
+        $this->addTemplateVariable('portfolio', $portfolio);
         $this->addTemplateVariable('homePage', true);
 
         return $this->render();
     }
 
-    private function createSlider() {
+    private function getRenderedSlideShow() {
         $sliderItems = $this->sliderService->getSliderItems();
-        $slideShow = view(env('THEME') . '.slide-show')->with(['sliderItems' => $sliderItems])->render();
-        $this->addTemplateVariable('slideShow', $slideShow);
+        return view(env('THEME') . '.slider.slide-show')->with(['sliderItems' => $sliderItems])->render();
+        
     }
 }

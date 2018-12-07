@@ -25,7 +25,7 @@ class SiteController extends Controller
 
     private function crateTopMenu() {
         $menu = $this->menuService->getMenu();
-        $topMenu = view(env('THEME') . '.top-menu')->with(['menu' => $menu])->render();
+        $topMenu = view(env('THEME') . '.top-menu.menu')->with(['menu' => $menu])->render();
         $this->addTemplateVariable('topMenu', $topMenu);
     }
 

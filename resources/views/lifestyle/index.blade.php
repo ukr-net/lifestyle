@@ -62,84 +62,23 @@
             <div class="col-md-10">
                 <!-- Portfolio -->
                 <ul class="portfolio-group">
-                    <!-- Portfolio Item -->
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInLeft">
-                                <img alt="image1" src="{{asset(env('THEME'))}}/assets/img/frontpage/image1.jpg">
-                                <figcaption>
-                                    <h3>Placerat facer possim</h3>
-                                    <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <!-- //Portfolio Item// -->
-                    <!-- Portfolio Item -->
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInRight">
-                                <img alt="image2" src="{{asset(env('THEME'))}}/assets/img/frontpage/image2.jpg">
-                                <figcaption>
-                                    <h3>Placerat facer possim</h3>
-                                    <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <!-- //Portfolio Item// -->
-                    <!-- Portfolio Item -->
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInLeft">
-                                <img alt="image3" src="{{asset(env('THEME'))}}/assets/img/frontpage/image3.jpg">
-                                <figcaption>
-                                    <h3>Placerat facer possim</h3>
-                                    <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <!-- //Portfolio Item// -->
-                    <!-- Portfolio Item -->
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInRight">
-                                <img alt="image4" src="{{asset(env('THEME'))}}/assets/img/frontpage/image4.jpg">
-                                <figcaption>
-                                    <h3>Placerat facer possim</h3>
-                                    <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <!-- //Portfolio Item// -->
-                    <!-- Portfolio Item -->
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInLeft">
-                                <img alt="image5" src="{{asset(env('THEME'))}}/assets/img/frontpage/image5.jpg">
-                                <figcaption>
-                                    <h3>Placerat facer possim</h3>
-                                    <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <!-- //Portfolio Item// -->
-                    <!-- Portfolio Item -->
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInRight">
-                                <img alt="image6" src="{{asset(env('THEME'))}}/assets/img/frontpage/image6.jpg">
-                                <figcaption>
-                                    <h3>Placerat facer possim</h3>
-                                    <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <!-- //Portfolio Item// -->
+                    @if(isset($portfolio))
+                        @foreach ($portfolio as $item)
+                            <!-- Portfolio Item -->
+                            <li class="portfolio-item col-sm-6 col-xs-12 padding-20">
+                                <a href="#">
+                                    <figure class="animate fadeInLeft">
+                                        <img alt="image1" src="{{asset(env('THEME'))}}/assets/img/{{$item->image}}">
+                                        <figcaption>
+                                            <h3>{{$item->title}}</h3>
+                                            <span>{{$item->description}}</span>
+                                        </figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <!-- //Portfolio Item// -->
+                        @endforeach
+                    @endif
                 </ul>
                 <!-- End Portfolio -->
             </div>

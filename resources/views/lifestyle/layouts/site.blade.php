@@ -135,6 +135,19 @@
                     </div>
                 </div>
             </div>
+            <!-- Footer Menu -->
+            <div id="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                        </div>
+                        <div id="copyright" class="col-md-4">
+                            <p class="pull-right">(c) <script type='text/javascript'>var mdate = new Date();document.write(mdate.getFullYear());</script> Your Copyright Info</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Footer Menu -->
             <!-- JS -->
             <script type="text/javascript" src="{{asset(env('THEME'))}}/assets/js/jquery.min.js" type="text/javascript"></script>
             <script type="text/javascript" src="{{asset(env('THEME'))}}/assets/js/bootstrap.min.js" type="text/javascript"></script>

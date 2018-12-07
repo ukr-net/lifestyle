@@ -3,7 +3,7 @@
     @if($item->hasChildren())
         <span @if($item->data('ico')) class="{!!$item->data('ico')!!}" @endif >{!!$item->title!!}</span>
         <ul>
-            @include(env('THEME') . '.menu-sub-items', ['items' => $item->children()])
+            @include(env('THEME') . '.top-menu.menu-sub-items', ['items' => $item->children()])
         </ul>
     @else
         <a href="{!!$item->url()!!}" @if($item->data('ico')) class="{!!$item->data('ico')!!}" @endif >{!!$item->title!!}</a>
