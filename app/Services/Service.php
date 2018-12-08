@@ -7,10 +7,6 @@ abstract class Service {
         return $this->model::all();
     }
 
-    public function getActive() {
-        return $this->model::where('active', 1)->get();
-    }
-
     public function getAllWith(String $joinModel) {
         return $this->model::with($joinModel)->get();
     }

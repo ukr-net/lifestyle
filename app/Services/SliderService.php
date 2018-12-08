@@ -9,7 +9,7 @@ class SliderService extends Service
     }
 
     public function getSliderItems() {
-        $items = $this->getActive();
+        $items = $this->getAll();
         $items->transform(function($item, $key){
             $item->image = config('settings.slider_dir') . '/' . $item->image;
             return $item; 
