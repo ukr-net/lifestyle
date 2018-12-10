@@ -10,6 +10,8 @@ use App\Services\PortfolioService;
 class IndexController extends SiteController
 {
     private $slider;
+    private $sliderService;
+    private $portfolioService;
 
     public function __construct(
         MenuService $menuService,

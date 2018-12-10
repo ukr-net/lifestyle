@@ -11,4 +11,5 @@
 |
 */
 
-Route::get('/', 'IndexCOntroller@index');
+Route::get('/', 'IndexController@index')->name('home');
+Route::get('/features/{alias}', 'FeatureController@index')->name('features');

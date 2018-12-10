@@ -11,7 +11,7 @@ abstract class Service {
         return $this->model::with($joinModel)->get();
     }
 
-    public function getNumberOf($limit, $order = 'first') {
+    public function getNumberOf($limit = 10, $order = 'first') {
         $order = $order == 'last' ? 'desc' : 'asc';
         return $this->model::select('*')
                     ->orderBy('id', $order)

@@ -16,17 +16,11 @@ class SiteController extends Controller
     public function __construct(MenuService $menuService) {
         $this->theme = env('THEME');
         $this->menuService = $menuService;
-        $this->init();
     }
 
-    private function init() {
-        $this->crateTopMenu();
-    }
-
-    private function crateTopMenu() {
+    protected function getTopMenu() {
         $menu = $this->menuService->getMenu();
-        $topMenu = view(env('THEME') . '.top-menu.menu')->with(['menu' => $menu])->render();
-        $this->addTemplateVariable('topMenu', $topMenu);
+        return view(env('THEME') . '.top-menu.menu')->with(['menu' => $menu])->render();
     }
 
     protected function addTemplateVariable(String $key, $value) {
@@ -34,6 +28,9 @@ class SiteController extends Controller
     }
 
     protected function render() {
+        $topMenu = $this->getTopMenu();
+        $this->addTemplateVariable('topMenu', $topMenu);
+
         return view($this->theme . '.' . $this->template)->with($this->vars);
     }
 }

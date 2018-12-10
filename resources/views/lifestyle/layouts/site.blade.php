@@ -44,7 +44,7 @@
                     <a href="#" target="_blank" title="GooglePlus"></a>
                 </li>
             </ul>
-            <div id="pre-header" class="container" style="height:340px">
+            <div id="pre-header" class="container" style="@if(isset($homePage)) height:340px @else height:40px @endif">
             </div>
             <div id="header">
                 <div class="container">
@@ -64,7 +64,7 @@
                 {!!$topMenu!!}
             @endif
             <!-- End Top Menu -->
-            <div id="post_header" class="container" style="height:340px">
+            <div id="post_header" class="container" style="@if(isset($homePage)) height:340px @else height:40px @endif">
             </div>
             <div id="content-top-border" class="container">
             </div>
