@@ -30,7 +30,7 @@
         <div class="col-md-12 portfolio-group no-padding">
             @if(isset($portfolios))
                 @foreach($portfolios as $portfolio)
-                    <div class="col-md-6 portfolio-item margin-bottom-40 {{$portfolio->filters->first()->alias}}">
+                    <div class="col-md-6 portfolio-item margin-bottom-40 @foreach($portfolio->filters as $filter) {{$filter->alias}} @endforeach">
                         <div>
                             <a href="#">
                                 <figure>
