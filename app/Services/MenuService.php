@@ -26,11 +26,13 @@ class MenuService extends Service
     }
 
     public function getFeaturesMenu() {
-        $menuItemFeatures = $this->model::where(['parent' => 0, 'title' =>'Features'])->first();
+        $collectionMenuItems = $this->getAll();
+
+        $menuItemFeatures = $collectionMenuItems->first(function($value, $key){
+            return $value->title == 'Features';
+        });
 
         if (!$menuItemFeatures) return false;
-        
-        $collectionMenuItems = $this->getAll();
 
         return LaravelMenu::make('fetauresSidebarMenu', function($menu) use($collectionMenuItems, $menuItemFeatures) {
             foreach ($collectionMenuItems as $item) {
