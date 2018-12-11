@@ -12,5 +12,6 @@
 */
 
 Route::get('/', 'IndexController@index')->name('home');
+Route::get('/portfolio', 'PortfolioController@index')->name('portfolio');
 Route::get('/{page}', 'PageController@index')->name('pages');
 Route::get('/features/{alias}', 'FeatureController@index')->name('features');
