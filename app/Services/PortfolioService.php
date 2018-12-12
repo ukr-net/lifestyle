@@ -8,13 +8,14 @@ class PortfolioService extends Service
         $this->model = $portfolio;
     }
 
-    public function getPorfolio($number = 0) {
-        if ($number) return $this->updateImgPath($this->getNumberOf($number, 'last'));
-        return $this->updateImgPath($this->getAll());
+    public function getPorfolio($limit = 0) {
+        $portfolios = $this->get(['limit' => $limit, 'order' => 'desc']);
+        return $this->updateImgPath($portfolios);
     }
 
     public function getPorfolioWithFilters() {
-        return $this->updateImgPath($this->getAllWith('filters'));
+        $portfolios = $this->get(['withs' => ['filters']]);
+        return $this->updateImgPath($portfolios);
     }
 
     private function updateImgPath($portfolios) {

@@ -9,6 +9,6 @@ class FeatureService extends Service
     }
 
     public function getFeature($alias) {
-        return $this->model::where('alias', $alias)->firstOrFail();
+        return $this->get(['alias' => $alias, 'result' => 'firstOrFail']);
     }
 }
