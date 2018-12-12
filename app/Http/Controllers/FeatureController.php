@@ -22,7 +22,7 @@ class FeatureController extends SiteController
         $this->menuService = $menuService;
     }
 
-    private function getSidebarMenu() {
+    private function getRenderedSidebarMenu() {
         $sidebarMenu = $this->menuService->getFeaturesMenu();
         return view(env('THEME') . '.sidebars.sidebar-menu.sidebar-menu')->with(['sidebarMenu' => $sidebarMenu])->render();
     }
@@ -31,7 +31,7 @@ class FeatureController extends SiteController
         $feature = $this->featureService->getFeature($alias);
         $this->addTemplateVariable('feature', $feature);
 
-        $sidebarMenu = $this->getSidebarMenu();
+        $sidebarMenu = $this->getRenderedSidebarMenu();
         $this->addTemplateVariable('sidebarMenu', $sidebarMenu);
 
         return $this->render();

@@ -18,7 +18,7 @@ class SiteController extends Controller
         $this->menuService = $menuService;
     }
 
-    protected function getTopMenu() {
+    protected function getRenderedTopMenu() {
         $menu = $this->menuService->getMenu();
         return view(env('THEME') . '.top-menu.menu')->with(['menu' => $menu])->render();
     }
@@ -28,7 +28,7 @@ class SiteController extends Controller
     }
 
     protected function render() {
-        $topMenu = $this->getTopMenu();
+        $topMenu = $this->getRenderedTopMenu();
         $this->addTemplateVariable('topMenu', $topMenu);
 
         return view($this->theme . '.' . $this->template)->with($this->vars);
