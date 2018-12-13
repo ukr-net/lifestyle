@@ -9,22 +9,12 @@ class PortfolioService extends Service
     }
 
     public function getPorfolio($limit = 0) {
-        $portfolios = $this->get(['limit' => $limit, 'order' => 'desc']);
-        return $this->updateImgPath($portfolios);
+        $portfolios = $this->get(['limit' => $limit, 'order' => ['id' => 'desc']]);
+        return $this->updateImgPath($portfolios, config('settings.portfolio_img_dir'));
     }
 
     public function getPorfolioWithFilters() {
         $portfolios = $this->get(['withs' => ['filters']]);
-        return $this->updateImgPath($portfolios);
-    }
-
-    private function updateImgPath($portfolios) {
-        if (!$portfolios) return null;
-
-        $portfolios->transform(function($item, $key){
-            $item->image = config('settings.portfolio_img_dir') . '/' . $item->image;
-            return $item; 
-        });
-        return $portfolios;
+        return $this->updateImgPath($portfolios, config('settings.portfolio_img_dir'));
     }
 }

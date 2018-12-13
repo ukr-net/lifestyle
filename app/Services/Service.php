@@ -1,5 +1,7 @@
 <?php namespace App\Services;
 
+use Carbon\Carbon;
+
 abstract class Service {
     protected $model;
 
@@ -11,9 +13,13 @@ abstract class Service {
         $defaultParams = [
             'select' => '*',
             'alias' => false,
+            'date' => false,
             'with' => [],
+            'withCount' => [],
             'order' => [],
-            'limit' => 0,
+            'limit' => false,
+            'whereHas' => [],
+            'paginate' => false,
             'result' => 'get'
         ];
 
@@ -25,9 +31,31 @@ abstract class Service {
             $builder->where('alias', $params['alias']);
         }
 
+        if ($params['date']) {
+            if ($createdDate = Carbon::createFromFormat('Y-m-d', $params['date'])) {
+                $builder->whereBetween('created_at', [
+                    $createdDate->startOfDay()->format('Y-m-d H:i:s'), 
+                    $createdDate->endOfDay()->format('Y-m-d H:i:s')
+                ]);
+            }
+        }
+
         if ($params['with'] && is_array($params['with'])) {
             foreach ($params['with'] as $property) {
-                $builder->with($property);
+                if (array_key_exists($property, $params['whereHas'])) {
+                    list($column, $value) = $params['whereHas'][$property];
+                    $builder->whereHas($property, function ($query) use ($column, $value) {
+                        $query->where($column, $value);
+                    });
+                } else {
+                    $builder->with($property);
+                } 
+            }
+        }
+
+        if ($params['withCount'] && is_array($params['withCount'])) {
+            foreach ($params['withCount'] as $property) {
+                $builder->withCount($property);
             }
         }
 
@@ -42,8 +70,23 @@ abstract class Service {
             $builder->limit(intval($params['limit']));
         }
 
+        if ($params['paginate']) {
+            return $builder->paginate(intval($params['paginate']));
+        }
+
         if ($params['result'] == 'firstOrFail') return $builder->firstOrFail();
 
         return $builder->get();
+    }
+
+    protected function updateImgPath($items, $path, $extraImgName = false, $extraImgPath = false) {
+        if (!$items) return null;
+
+        $items->transform(function($item, $key) use($path, $extraImgName, $extraImgPath) {
+            if ($extraImgName && $extraImgPath) $item->{$extraImgName} = $extraImgPath . '/' . $item->image;
+            $item->image = $path . '/' . $item->image;
+            return $item; 
+        });
+        return $items;
     }
 }
