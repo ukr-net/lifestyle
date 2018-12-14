@@ -2,79 +2,9 @@
     <div class="row margin-vert-30">
         <!-- Side Column -->
         <div class="col-md-3">
-            <!-- Recent Posts -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Recent Posts</h3>
-                </div>
-                <div class="panel-body">
-                    <ul class="posts-list margin-top-10">
-                        <li>
-                            <div class="recent-post">
-                                <a href="">
-                                    <img class="pull-left" src="assets/img/blog/thumbs/thumb1.jpg" alt="thumb1">
-                                </a>
-                                <a href="#" class="posts-list-title">Sidebar post example</a>
-                                <br>
-                                <span class="recent-post-date">
-                                    July 30, 2013
-                                </span>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li>
-                            <div class="recent-post">
-                                <a href="">
-                                    <img class="pull-left" src="assets/img/blog/thumbs/thumb2.jpg" alt="thumb2">
-                                </a>
-                                <a href="#" class="posts-list-title">Sidebar post example</a>
-                                <br>
-                                <span class="recent-post-date">
-                                    July 30, 2013
-                                </span>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li>
-                            <div class="recent-post">
-                                <a href="">
-                                    <img class="pull-left" src="assets/img/blog/thumbs/thumb3.jpg" alt="thumb3">
-                                </a>
-                                <a href="#" class="posts-list-title">Sidebar post example</a>
-                                <br>
-                                <span class="recent-post-date">
-                                    July 30, 2013
-                                </span>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li>
-                            <div class="recent-post">
-                                <a href="">
-                                    <img class="pull-left" src="assets/img/blog/thumbs/thumb4.jpg" alt="thumb4">
-                                </a>
-                                <a href="#" class="posts-list-title">Sidebar post example</a>
-                                <br>
-                                <span class="recent-post-date">
-                                    July 30, 2013
-                                </span>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- End recent Posts -->
-            <!-- About -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">About</h3>
-                </div>
-                <div class="panel-body">
-                    Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.
-                </div>
-            </div>
-            <!-- End About -->
+            @if(isset($sidebar))
+                {!!$sidebar!!}
+            @endif
         </div>
         <!-- End Side Column -->
         <!-- Main Column -->
