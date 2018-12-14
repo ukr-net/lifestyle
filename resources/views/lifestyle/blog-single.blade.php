@@ -91,7 +91,12 @@
                                                     <label>Name</label>
                                                     <div class="row margin-bottom-20">
                                                         <div class="col-md-7 col-md-offset-0">
-                                                            <input class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}" type="text" name="name" value="{{old('name', '')}}" required>
+                                                            <input 
+                                                            class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}" 
+                                                            type="text" 
+                                                            name="name" 
+                                                            value="{{old('name', '')}}" 
+                                                            required>
                                                         </div>
                                                     </div>
                                                     <label>Email
@@ -99,13 +104,22 @@
                                                     </label>
                                                     <div class="row margin-bottom-20">
                                                         <div class="col-md-7 col-md-offset-0">
-                                                            <input class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" type="text" name="email" value="{{old('email', '')}}" required>
+                                                            <input 
+                                                            class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" 
+                                                            type="text" 
+                                                            name="email" 
+                                                            value="{{old('email', '')}}" required>
                                                         </div>
                                                     </div>
                                                     <label>Message</label>
                                                     <div class="row margin-bottom-20">
                                                         <div class="col-md-11 col-md-offset-0 {{$errors->has('text') ? 'is-invalid' : ''}}">
-                                                            <textarea class="form-control" rows="8" name="text" required>{{old('text', '')}}</textarea>
+                                                            <textarea 
+                                                            class="form-control" 
+                                                            rows="8" 
+                                                            name="text" 
+                                                            required>{{old('text', '')}}
+                                                            </textarea>
                                                         </div>
                                                     </div>
                                                     <p>

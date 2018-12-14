@@ -17,4 +17,6 @@ Route::get('/blog', 'BlogController@list')->name('blogList');
 Route::get('/blog/{alias}', 'BlogController@single')->name('blogSingle');
 Route::get('/{page}', 'PageController@index')->name('pages');
 Route::get('/features/{alias}', 'FeatureController@index')->name('features');
+
 Route::post('/comment/add', 'CommentController@addComment')->name('addComment');
+Route::post('/form/send-email', 'FormController@contactForm')->name('contactForm');
