@@ -21,6 +21,18 @@ class PostService extends Service
         return $this->updateImgPath($posts, config('settings.blog_img_dir'), 'thumb_img', config('settings.blog_img_thmbs_dir'));
     }
 
+    public function getPost($alias) {
+        $post = $this->get([
+            'alias' => $alias,
+            'result' => 'firstOrFail',
+            'with' => ['tags','user', 'comments']
+        ]);
+
+        $post->image = $post->image = config('settings.blog_img_dir') . '/' . $post->image;
+
+        return $post;
+    }
+
     public function getRecentPosts() {
         $posts = $this->get(['limit' => config('settings.recent_posts_count'), 'order' => ['id' => 'desc']]);
         return $this->updateImgPath($posts, config('settings.blog_img_dir'), 'thumb_img', config('settings.blog_img_thmbs_dir'));

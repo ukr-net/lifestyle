@@ -87,6 +87,7 @@ abstract class Service {
             $item->image = $path . '/' . $item->image;
             return $item; 
         });
+        
         return $items;
     }
 }

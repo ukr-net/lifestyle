@@ -2,7 +2,8 @@
 
 use App\Filter as PortfolioFilter;
 
-class FilterService extends Service {
+class FilterService extends Service 
+{
     public function __construct(PortfolioFilter $portfolioFilter) {
         $this->model = $portfolioFilter;
     }

@@ -41,7 +41,18 @@ class BlogController extends SiteController
     }
 
     public function single($alias) {
-        dd($alias);
+        $this->template = 'blog-single';
+
+        $post = $this->postService->getPost($alias);
+        $recentPosts = $this->postService->getRecentPosts();
+        $tags = $this->tagService->getAll();
+
+        $sidebar = $this->getRenderedSidebar($recentPosts, $tags);
+
+        $this->addTemplateVariable('sidebar', $sidebar);
+        $this->addTemplateVariable('post', $post);
+
+        return $this->render();
     }
 
     private function getRenderedSidebar($posts, $tags) {

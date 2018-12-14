@@ -30,8 +30,8 @@
                             <!-- Date -->
                             <div class="blog-post-details-item blog-post-details-item-left">
                                 <i class="fa fa-calendar color-gray-light"></i>
-                                <a href="{{route('blogList', ['date' => \DateTime::createFromFormat('Y-m-d H:i:s', $post->created_at)->format('Y-m-d')])}}">
-                                    {{\DateTime::createFromFormat('Y-m-d H:i:s', $post->created_at)->format('D d, Y')}}
+                                <a href="{{route('blogList', ['date' => $post->created_at->format('Y-m-d')])}}">
+                                    {{$post->created_at->format('D d, Y')}}
                                 </a>
                             </div>
                             <!-- End Date -->
