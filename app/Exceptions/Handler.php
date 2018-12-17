@@ -46,8 +46,24 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        global $app;
+
         if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
-            return response()->view('lifestyle.404', []);
+            $errorController = $app->make('\App\Http\Controllers\ErrorController');
+            $view = $errorController->pageNotFound();
+            return response($view);
+        }
+
+        if ($this->isHttpException($exception)) {
+            $getStatusCode = $exception->getStatusCode();
+
+            switch($getStatusCode) {
+                case '404' : {
+                    $errorController = $app->make('\App\Http\Controllers\ErrorController');
+                    $view = $errorController->pageNotFound();
+                    return response($view);
+                }
+            }
         }
 
         return parent::render($request, $exception);
