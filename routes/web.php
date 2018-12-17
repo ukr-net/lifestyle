@@ -15,8 +15,16 @@ Route::get('/', 'IndexController@index')->name('home');
 Route::get('/portfolio', 'PortfolioController@index')->name('portfolio');
 Route::get('/blog', 'BlogController@list')->name('blogList');
 Route::get('/blog/{alias}', 'BlogController@single')->name('blogSingle');
-Route::get('/{page}', 'PageController@index')->name('pages');
 Route::get('/features/{alias}', 'FeatureController@index')->name('features');
 
 Route::post('/comment/add', 'CommentController@addComment')->name('addComment');
 Route::post('/form/send-email', 'FormController@contactForm')->name('contactForm');
+
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('/password/reset', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+
+Route::post('/login', 'Auth\LoginController@login');
+Route::post('/password/email', 'FormController@contactForm')->name('password.email');
+
+Route::get('/{page}', 'PageController@index')->name('pages');

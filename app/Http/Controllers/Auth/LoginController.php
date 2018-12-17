@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\SiteController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Services\MenuService;
 
-class LoginController extends Controller
+class LoginController extends SiteController
 {
     /*
     |--------------------------------------------------------------------------
@@ -25,15 +26,28 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(MenuService $menuService)
     {
+        parent::__construct($menuService);
+        
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLoginForm()
+    {
+        $this->template = 'auth.login';
+        return parent::render();
+    }
+
+    public function username()
+    {
+        return 'login';
     }
 }
