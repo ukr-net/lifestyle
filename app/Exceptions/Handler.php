@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
             $errorController = $app->make('\App\Http\Controllers\ErrorController');
-            $view = $errorController->pageNotFound();
+            $view = $errorController->modelNotFound();
             return response($view);
         }
 
