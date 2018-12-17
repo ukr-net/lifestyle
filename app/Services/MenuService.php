@@ -37,7 +37,7 @@ class MenuService extends Service
         return LaravelMenu::make('fetauresSidebarMenu', function($menu) use($collectionMenuItems, $menuItemFeatures) {
             foreach ($collectionMenuItems as $item) {
                 if ($item->parent == $menuItemFeatures->id) {
-                    $menuItem = $menu->add($item->title, $item->url)->id($item->id)->data('ico', $item->ico);
+                    $menu->add($item->title, $item->url)->id($item->id)->data('ico', $item->ico);
                 } else {
                     if ($menu->find($item->parent)) {
                         $menu->find($item->parent)->add($item->title, $item->url)->id($item->id)->data('ico', $item->ico);
@@ -45,5 +45,26 @@ class MenuService extends Service
                 }
             }
         });
+    }
+
+    public function getAdminMenu() {
+        return LaravelMenu::make('adminMenu', function($menu) {
+                $menu->add('home', route('admin.home'));
+                $menu->add('menu', route('admin.home'));
+                $menu->add('features', route('admin.home'));
+
+                $menuItem = $menu->add('portfolio', '');
+                $menuItem->add('Filters', route('admin.home'));
+                $menuItem->add('Portfolios', route('admin.home'));
+
+                $menuItem = $menu->add('blog', '');
+                $menuItem->add('Tags', route('admin.home'));
+                $menuItem->add('Posts', route('admin.home'));
+                $menuItem->add('Comments', route('admin.home'));
+
+                $menuItem = $menu->add('Users', '');
+                $menuItem->add('Users', route('admin.home'));
+                $menuItem->add('Permissions', route('admin.home'));
+            });
     }
 }

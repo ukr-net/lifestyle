@@ -27,4 +27,8 @@ Route::get('/password/reset', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::post('/login', 'Auth\LoginController@login');
 Route::post('/password/email', 'FormController@contactForm')->name('password.email');
 
+Route::namespace('Admin')->prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/', 'IndexController@index')->name('admin.home');
+});
+
 Route::get('/{page}', 'PageController@index')->name('pages');

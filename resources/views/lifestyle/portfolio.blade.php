@@ -32,15 +32,13 @@
                 @foreach($portfolios as $portfolio)
                     <div class="col-md-6 portfolio-item margin-bottom-40 @foreach($portfolio->filters as $filter) {{$filter->alias}} @endforeach">
                         <div>
-                            <a href="#">
-                                <figure>
-                                    <img src="{{asset(env('THEME'))}}/assets/img/{{$portfolio->image}}" alt="image1">
-                                    <figcaption>
-                                        <h3 class="margin-top-20">{{$portfolio->title}}</h3>
-                                        <span>{{$portfolio->description}}</span>
-                                    </figcaption>
-                                </figure>
-                            </a>
+                            <figure>
+                                <img src="{{asset(env('THEME'))}}/assets/img/{{$portfolio->image}}" alt="image1">
+                                <figcaption>
+                                    <h3 class="margin-top-20">{{$portfolio->title}}</h3>
+                                    <span>{{$portfolio->description}}</span>
+                                </figcaption>
+                            </figure>
                         </div>
                     </div>
                     <!-- End Portfolio Item -->
