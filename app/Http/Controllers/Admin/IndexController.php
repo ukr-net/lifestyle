@@ -17,7 +17,7 @@ class IndexController extends AdminController
 
     public function index() {
         
-        if (Gate::denies('VIEW_ADMIN')) {
+        if (Gate::denies('ADMIN_VIEW')) {
             abort(403);
         }
         return $this->render();

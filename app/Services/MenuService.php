@@ -49,9 +49,9 @@ class MenuService extends Service
 
     public function getAdminMenu() {
         return LaravelMenu::make('adminMenu', function($menu) {
-                $menu->add('home', route('admin.home'));
-                $menu->add('menu', route('admin.home'));
-                $menu->add('features', route('admin.home'));
+                $menu->add('Home', route('admin.home'));
+                $menu->add('Menu', route('admin.home'));
+                $menu->add('Features', route('admin.features.index'));
 
                 $menuItem = $menu->add('portfolio', '');
                 $menuItem->add('Filters', route('admin.home'));

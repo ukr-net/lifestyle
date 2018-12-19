@@ -6,5 +6,6 @@
         'blog_img_dir' => 'blog',
         'blog_img_thmbs_dir' => 'blog/thumbs',
         'recent_posts_count' => 4,
-        'blog_post_on_page' => 3
+        'blog_post_on_page' => 3,
+        'admin_page_items_count' => 6,
     ];

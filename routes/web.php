@@ -29,6 +29,11 @@ Route::post('/password/email', 'FormController@contactForm')->name('password.ema
 
 Route::namespace('Admin')->prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', 'IndexController@index')->name('admin.home');
+    Route::resource('/features', 'FeatureController')->names([
+        'index' => 'admin.features.index',
+        'edit' => 'admin.features.edit',
+        'create' => 'admin.features.create',
+    ]);
 });
 
 Route::get('/{page}', 'PageController@index')->name('pages');
