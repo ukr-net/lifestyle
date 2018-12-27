@@ -33,6 +33,9 @@ Route::namespace('Admin')->prefix('admin')->middleware('auth')->group(function (
         'index' => 'admin.features.index',
         'edit' => 'admin.features.edit',
         'create' => 'admin.features.create',
+        'store' => 'admin.features.store',
+        'destroy' => 'admin.features.destroy',
+        'update' => 'admin.features.update'
     ]);
 });
 

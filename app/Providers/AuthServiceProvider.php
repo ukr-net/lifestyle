@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Feature' => 'App\Policies\FeaturePolicy',
     ];
 
     /**
@@ -29,8 +29,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->canDo('ADMIN_VIEW');
         });
 
-        Gate::define('FEATURES_VIEW', function ($user) {
-            return $user->canDo('FEATURES_VIEW');
-        });
+        Gate::resource('features', 'App\Policies\FeaturePolicy');
+        Gate::define('features.list', 'App\Policies\FeaturePolicy@list');
     }
 }

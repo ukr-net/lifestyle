@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\FeatureRequest;
 use App\Http\Controllers\Controller;
 use App\Services\FeatureService;
 use Gate;
+use Validator;
+use App\Feature;
 
 class FeatureController extends AdminController
 {
@@ -24,7 +27,7 @@ class FeatureController extends AdminController
      */
     public function index()
     {
-        if (Gate::denies('FEATURES_VIEW')) {
+        if (Gate::denies('features.list')) {
             abort(403);
         }
 
@@ -46,7 +49,12 @@ class FeatureController extends AdminController
      */
     public function create()
     {
-        //
+        if (Gate::denies('features.create')) {
+            abort(403);
+        }
+
+        $this->template = 'features.create';
+        return $this->render();
     }
 
     /**
@@ -55,9 +63,21 @@ class FeatureController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FeatureRequest $request)
     {
-        //
+        if (Gate::denies('features.create')) {
+            abort(403);
+        }
+
+        $data = $request->except(['_token', '_method']);
+
+        $result = $this->featureService->add($data);
+
+        if (is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        
+        return redirect(route('admin.features.index'));
     }
 
     /**
@@ -77,9 +97,16 @@ class FeatureController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Feature $feature)
     {
-        //
+        if (Gate::denies('features.update')) {
+            abort(403);
+        }
+
+        $this->template = 'features.create';
+        $this->addTemplateVariable('feature', $feature);
+
+        return $this->render();
     }
 
     /**
@@ -89,9 +116,21 @@ class FeatureController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FeatureRequest $request, $id)
     {
-        //
+        if (Gate::denies('features.update')) {
+            abort(403);
+        }
+        
+        $data = $request->except(['_token', '_method']);
+
+        $result = $this->featureService->update($id, $data);
+
+        if (is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        
+        return redirect(route('admin.features.edit', ['id' => $id]));
     }
 
     /**
@@ -102,6 +141,12 @@ class FeatureController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        if (Gate::denies('features.delete')) {
+            abort(403);
+        }
+
+        $this->featureService->delete($id);
+
+        return redirect(route('admin.features.index'));
     }
 }

@@ -90,4 +90,31 @@ abstract class Service {
         
         return $items;
     }
+
+    public function add($data) {
+        $model = new $this->model;
+        $model->fill($data);
+        return $model->save();
+    }
+
+    public function delete($id) {
+        $model = $this->model::find($id);
+
+        if ($model) {
+            return $model->delete();
+        }
+
+        return false;
+    }
+
+    public function update($id, $data) {
+        $model = $this->model::find($id);
+
+        if ($model) {
+            $model->fill($data);
+            return $model->save();
+        }
+
+        return false;
+    }
 }

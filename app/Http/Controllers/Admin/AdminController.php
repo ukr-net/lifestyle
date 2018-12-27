@@ -16,7 +16,6 @@ class AdminController extends Controller
 
     public function __construct() {
         global $app;
-        $this->middleware('auth');
         $this->theme = env('THEME') . '.admin';
         $this->menuService = $app->make('App\Services\MenuService');
     }

@@ -20,9 +20,13 @@
                 <td>{{str_limit($feature->text,500)}}</td>
                 <td>{{$feature->alias}}</td>
                 <td>
-                    <form>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                    @can('delete', $feature)
+                        <form method="POST" action="{{route('admin.features.destroy',['id' => $feature->id])}}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    @endcan
                 </td>
             </tr>
             @endforeach
