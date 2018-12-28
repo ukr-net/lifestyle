@@ -3,22 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\FeatureRequest;
 use App\Http\Controllers\Controller;
-use App\Services\FeatureService;
 use Gate;
-use App\Feature;
+use App\Http\Requests\MenuRequest;
 
-class FeatureController extends AdminController
+class MenuController extends AdminController
 {
-    private $featureService;
-
-    public function __construct(FeatureService $featureService) {
-        parent::__construct();
-
-        $this->featureService = $featureService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,18 +16,14 @@ class FeatureController extends AdminController
      */
     public function index()
     {
-        if (Gate::denies('features.index')) {
+        if (Gate::denies('menu.index')) {
             abort(403);
         }
 
-        $features = $this->featureService->get([
-            'order' => ['id' => 'desc'],
-            'paginate' => config('settings.admin_page_items_count')
-        ]);
+        $menu = $this->menuService->getMenu();
+        $this->addTemplateVariable('menu', $menu);
 
-        $this->addTemplateVariable('features', $features);
-
-        $this->template = 'features.index';
+        $this->template = 'menu.index';
         return $this->render();
     }
 
@@ -48,11 +34,14 @@ class FeatureController extends AdminController
      */
     public function create()
     {
-        if (Gate::denies('features.create')) {
+        if (Gate::denies('menu.create')) {
             abort(403);
         }
 
-        $this->template = 'features.create';
+        $menu = $this->menuService->getMenu();
+        $this->addTemplateVariable('menu', $menu);
+
+        $this->template = 'menu.create';
         return $this->render();
     }
 
@@ -62,21 +51,21 @@ class FeatureController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FeatureRequest $request)
+    public function store(MenuRequest $request)
     {
-        if (Gate::denies('features.create')) {
+        if (Gate::denies('menu.create')) {
             abort(403);
         }
 
         $data = $request->except(['_token', '_method']);
 
-        $result = $this->featureService->add($data);
+        $result = $this->menuService->add($data);
 
-        if (is_array($result) && !empty($result['error'])) {
+        if (is_array($result) && $result['error']) {
             return back()->with($result);
         }
-        
-        return redirect(route('admin.features.index'));
+
+        return redirect(route('admin.menu.index'));
     }
 
     /**
@@ -87,7 +76,20 @@ class FeatureController extends AdminController
      */
     public function show($id)
     {
-        //
+        if (Gate::denies('menu.view')) {
+            abort(403);
+        }
+
+        $item = $this->menuService->getMenuItem($id);
+        
+        if ($item->parent) {
+            $item->parentMenu = $this->menuService->getMenuItem($item->parent);
+        }
+
+        $this->addTemplateVariable('item', $item);
+
+        $this->template = 'menu.show';
+        return $this->render();
     }
 
     /**
@@ -96,15 +98,19 @@ class FeatureController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Feature $feature)
+    public function edit($id)
     {
-        if (Gate::denies('features.update')) {
+        if (Gate::denies('menu.update')) {
             abort(403);
         }
 
-        $this->template = 'features.create';
-        $this->addTemplateVariable('feature', $feature);
+        $item = $this->menuService->getMenuItem($id);
+        $menu = $this->menuService->getMenu();
 
+        $this->addTemplateVariable('menu', $menu);
+        $this->addTemplateVariable('item', $item);
+
+        $this->template = 'menu.create';
         return $this->render();
     }
 
@@ -115,21 +121,21 @@ class FeatureController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FeatureRequest $request, $id)
+    public function update(MenuRequest $request, $id)
     {
-        if (Gate::denies('features.update')) {
+        if (Gate::denies('menu.update')) {
             abort(403);
         }
-        
+
         $data = $request->except(['_token', '_method']);
 
-        $result = $this->featureService->update($id, $data);
+        $result = $this->menuService->update($id, $data);
 
         if (is_array($result) && !empty($result['error'])) {
             return back()->with($result);
         }
         
-        return redirect(route('admin.features.edit', ['id' => $id]));
+        return redirect(route('admin.menu.show', ['id' => $id]));
     }
 
     /**
@@ -140,12 +146,12 @@ class FeatureController extends AdminController
      */
     public function destroy($id)
     {
-        if (Gate::denies('features.delete')) {
+        if (Gate::denies('menu.delete')) {
             abort(403);
         }
 
-        $this->featureService->delete($id);
+        $this->menuService->delete($id);
 
-        return redirect(route('admin.features.index'));
+        return redirect(route('admin.menu.index'));
     }
 }

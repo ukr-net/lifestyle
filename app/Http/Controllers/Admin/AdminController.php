@@ -10,10 +10,10 @@ class AdminController extends Controller
 {
     protected $theme;
     protected $template;
+    protected $menuService;
 
     private $vars = [];
-    private $menuService;
-
+    
     public function __construct() {
         global $app;
         $this->theme = env('THEME') . '.admin';

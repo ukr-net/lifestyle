@@ -9,6 +9,6 @@ class FeaturePolicy extends SitePolicy
         'create' => 'FEATURES_ADD',
         'update' => 'FEATURES_UPDATE',
         'delete' => 'FEATURES_DELETE',
-        'list' => 'FEATURES_VIEW'
+        'index' => 'FEATURES_INDEX'
     ];
 }

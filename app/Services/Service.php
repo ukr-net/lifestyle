@@ -12,6 +12,7 @@ abstract class Service {
     public function get($params = []) {
         $defaultParams = [
             'select' => '*',
+            'id' => false,
             'alias' => false,
             'date' => false,
             'with' => [],
@@ -26,6 +27,10 @@ abstract class Service {
         $params = array_merge($defaultParams, $params);
 
         $builder = $this->model->select($params['select']);
+
+        if ($params['id']) {
+            $builder->where('id', $params['id']);
+        }
 
         if ($params['alias']) {
             $builder->where('alias', $params['alias']);

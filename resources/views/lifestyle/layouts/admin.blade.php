@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="{{asset(env('THEME'))}}/assets/css/nexus.css">
         <link rel="stylesheet" href="{{asset(env('THEME'))}}/assets/css/responsive.css">
         <link rel="stylesheet" href="{{asset(env('THEME'))}}/assets/css/custom.css">
+        <link rel="stylesheet" href="{{asset(env('THEME'))}}/assets/css/bootstrap-select.min.css">
         <!-- Google Fonts-->
         <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=PT+Sans" type="text/css" rel="stylesheet">
@@ -82,6 +83,8 @@
             <script src="{{asset(env('THEME'))}}/assets/js/modernizr.custom.js" type="text/javascript"></script>
             <!-- ckeditor -->
             <script src="{{asset(env('THEME'))}}/assets/js/ckeditor/ckeditor.js" type="text/javascript"></script>
+            <!-- bootstrap-select -->
+            <script src="{{asset(env('THEME'))}}/assets/js/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
             <!-- admin -->
             <script src="{{asset(env('THEME'))}}/assets/js/admin.js" type="text/javascript"></script>
             <!-- End JS -->

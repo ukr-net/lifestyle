@@ -19,6 +19,8 @@ class SitePolicy
      */
     public function view(User $user)
     {
+        if (array_key_exists('view', $this->permissions)) return $user->canDo($this->permissions['view']);
+
         return false;
     }
 
@@ -83,9 +85,9 @@ class SitePolicy
         return false;
     }
 
-    public function list(User $user)
+    public function index(User $user)
     {
-        if (array_key_exists('list', $this->permissions)) return $user->canDo($this->permissions['list']);
+        if (array_key_exists('index', $this->permissions)) return $user->canDo($this->permissions['index']);
 
         return false;
     }

@@ -1,3 +1,11 @@
 input.is-invalid {
     border-color: #dc3545;
 }
+
+.dropdown-menu .inner .dropdown-menu {
+    background-color: white;
+}
+
+.dropdown-menu .inner .dropdown-menu .selected{
+    color: white;
+}

@@ -29,6 +29,7 @@ Route::post('/password/email', 'FormController@contactForm')->name('password.ema
 
 Route::namespace('Admin')->prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', 'IndexController@index')->name('admin.home');
+
     Route::resource('/features', 'FeatureController')->names([
         'index' => 'admin.features.index',
         'edit' => 'admin.features.edit',
@@ -36,6 +37,16 @@ Route::namespace('Admin')->prefix('admin')->middleware('auth')->group(function (
         'store' => 'admin.features.store',
         'destroy' => 'admin.features.destroy',
         'update' => 'admin.features.update'
+    ])->except(['show']);
+    
+    Route::resource('/menu', 'MenuController')->names([
+        'index' => 'admin.menu.index',
+        'edit' => 'admin.menu.edit',
+        'create' => 'admin.menu.create',
+        'store' => 'admin.menu.store',
+        'destroy' => 'admin.menu.destroy',
+        'update' => 'admin.menu.update',
+        'show' => 'admin.menu.show'
     ]);
 });
 

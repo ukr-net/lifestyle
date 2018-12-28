@@ -18,7 +18,7 @@ class MenuService extends Service
                     $menuItem = $menu->add($item->title, $item->url)->id($item->id)->data('ico', $item->ico);
                 } else {
                     if ($menu->find($item->parent)) {
-                        $menu->find($item->parent)->add($item->title, $item->url)->id($item->id);
+                        $menu->find($item->parent)->add($item->title, $item->url)->id($item->id)->data('ico', $item->ico);
                     }
                 }
             }
@@ -50,7 +50,7 @@ class MenuService extends Service
     public function getAdminMenu() {
         return LaravelMenu::make('adminMenu', function($menu) {
                 $menu->add('Home', route('admin.home'));
-                $menu->add('Menu', route('admin.home'));
+                $menu->add('Menu', route('admin.menu.index'));
                 $menu->add('Features', route('admin.features.index'));
 
                 $menuItem = $menu->add('portfolio', '');
@@ -66,5 +66,12 @@ class MenuService extends Service
                 $menuItem->add('Users', route('admin.home'));
                 $menuItem->add('Permissions', route('admin.home'));
             });
+    }
+
+    public function getMenuItem($id) {
+        return $this->get([
+            'id' => $id,
+            'result' => 'firstOrFail'
+        ]);
     }
 }

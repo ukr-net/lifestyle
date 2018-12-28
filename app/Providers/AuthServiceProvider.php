@@ -14,6 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Feature' => 'App\Policies\FeaturePolicy',
+        'App\Menu' => 'App\Policies\MenuPolicy',
     ];
 
     /**
@@ -30,6 +31,9 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::resource('features', 'App\Policies\FeaturePolicy');
-        Gate::define('features.list', 'App\Policies\FeaturePolicy@list');
+        Gate::define('features.index', 'App\Policies\FeaturePolicy@index');
+
+        Gate::resource('menu', 'App\Policies\MenuPolicy');
+        Gate::define('menu.index', 'App\Policies\MenuPolicy@index');
     }
 }
