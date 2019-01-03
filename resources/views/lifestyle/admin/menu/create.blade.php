@@ -28,7 +28,7 @@
                     <option value="0" data-content="No parent">No parent</option>
                     @foreach($menu->all() as $menuItem)
                         @if(!(isset($item->id) && ($menuItem->id == $item->id)))
-                            <option value="{{$menuItem->id}}" data-icon="{{$menuItem->ico}}" {{$menuItem->id == $item->parent ? 'selected' : ''}}>{{$menuItem->title}}</option>
+                            <option value="{{$menuItem->id}}" data-icon="{{$menuItem->ico}}" {{isset($item) && $menuItem->id == $item->parent ? 'selected' : ''}}>{{$menuItem->title}}</option>
                         @endif
                     @endforeach
                 </select>
