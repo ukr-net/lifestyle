@@ -35,5 +35,8 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::resource('menu', 'App\Policies\MenuPolicy');
         Gate::define('menu.index', 'App\Policies\MenuPolicy@index');
+
+        Gate::define('permission.index', 'App\Policies\PermissionPolicy@index');
+        Gate::define('permission.update', 'App\Policies\PermissionPolicy@update');
     }
 }

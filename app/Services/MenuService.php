@@ -64,7 +64,7 @@ class MenuService extends Service
 
                 $menuItem = $menu->add('Users', '');
                 $menuItem->add('Users', route('admin.home'));
-                $menuItem->add('Permissions', route('admin.home'));
+                $menuItem->add('Permissions', route('admin.permissions.index'));
             });
     }
 

@@ -48,6 +48,11 @@ Route::namespace('Admin')->prefix('admin')->middleware('auth')->group(function (
         'update' => 'admin.menu.update',
         'show' => 'admin.menu.show'
     ]);
+
+    Route::resource('/permissions', 'PermissionController')->names([
+        'index' => 'admin.permissions.index',
+        'store' => 'admin.permissions.store'
+    ])->only(['index', 'store']);
 });
 
 Route::get('/{page}', 'PageController@index')->name('pages');
